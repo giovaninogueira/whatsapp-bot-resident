@@ -2,16 +2,17 @@ import { Request, Response } from "express";
 import { WhatsAppProvider } from "../providers/whatsapp/whatsapp.provider";
 
 class GetBase64UseCase {
+    /**
+     * Get base64 and status
+     * @param req 
+     * @param resp 
+     * @returns 
+     */
     async execute(req: Request, resp: Response) {
-        const isActive = await WhatsAppProvider.isActive()
-        if (isActive) {
-            return resp.send({
-                isActive: isActive,
-                base64: null
-            })
-        }
+        const status = await WhatsAppProvider.isActive();
         return resp.send({
-            base64: WhatsAppProvider.base64
+            status: status,
+            base64: !status ? WhatsAppProvider.base64 : null
         })
     }
 }

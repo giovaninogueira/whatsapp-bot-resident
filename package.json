@@ -19,7 +19,9 @@
     "express": "^4.18.1",
     "reflect-metadata": "^0.1.13",
     "sqlite3": "^5.0.10",
-    "typeorm": "^0.3.7"
+    "tsc": "^2.0.4",
+    "typeorm": "^0.3.7",
+    "venom-bot": "^4.2.0"
   },
   "devDependencies": {
     "@types/node": "^18.6.1",
