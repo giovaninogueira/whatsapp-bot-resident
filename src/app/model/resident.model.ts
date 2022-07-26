@@ -1,4 +1,16 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm";
+import { 
+  Entity, 
+  PrimaryGeneratedColumn, 
+  Column, 
+  BaseEntity, 
+  CreateDateColumn, 
+  UpdateDateColumn, 
+  OneToMany, 
+  ManyToOne
+} from "typeorm";
+
+import { ChatModel } from "./chat.model";
+import { HouseModel } from "./house.model";
 
 @Entity()
 export class ResidentModel extends BaseEntity {
@@ -14,10 +26,20 @@ export class ResidentModel extends BaseEntity {
     length: 20,
     unique: true
   })
-  phone: string;
+  cellphone: string;
 
-  @Column({
-    length: 20,
-  })
-  apartment: string;
+  @Column()
+  notify: boolean;
+
+  @ManyToOne(() => HouseModel, (house) => house.residents)
+  house: HouseModel
+
+  @OneToMany(() => ChatModel, (chat) => chat.resident)
+  chats: ChatModel[]
+
+  @CreateDateColumn()
+  created_at: Date;
+
+  @UpdateDateColumn()
+  updated_at: Date;
 }

@@ -1,7 +1,10 @@
 import "reflect-metadata";
 import { DataSource } from "typeorm";
+import { HouseModel } from "../app/model/house.model";
 import { ResidentModel } from "../app/model/resident.model";
+import { DeliveryModel } from '../app/model/delivery.model';
 import { root } from "../utils/path";
+import { ChatModel } from "../app/model/chat.model";
 
 class Database {
   /**
@@ -20,7 +23,7 @@ class Database {
     this.appDataSource = new DataSource({
       type: "sqlite",
       database: `${root}/data/line.sqlite`,
-      entities: [ResidentModel],
+      entities: [ResidentModel, HouseModel, DeliveryModel, ChatModel],
       synchronize: true,
       logging: false,
     });

@@ -23,7 +23,7 @@ class App {
     app.use(express.json())
     app.use("/", router);
     app.listen(3000, () => console.log("server is running..."));
-    await WhatsAppProvider.connect('session_test')
+    // await WhatsAppProvider.connect('session_test')
   }
 }
 
