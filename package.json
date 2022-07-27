@@ -21,7 +21,7 @@
     "sqlite3": "^5.0.10",
     "tsc": "^2.0.4",
     "typeorm": "^0.3.7",
-    "venom-bot": "^4.2.0"
+    "venom-bot": "github:renandecarlo/venom"
   },
   "devDependencies": {
     "@types/node": "^18.6.1",

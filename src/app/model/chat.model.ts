@@ -7,6 +7,7 @@ import {
     UpdateDateColumn,
     ManyToOne
 } from "typeorm";
+import { DeliveryModel } from "./delivery.model";
 
 import { ResidentModel } from './resident.model'
 
@@ -28,13 +29,13 @@ export class ChatModel extends BaseEntity {
     })
     response: string;
 
-    @Column()
-    chatId: string;
-
     @Column({
         default: false
     })
     waitResponse: boolean
+
+    @ManyToOne(() => DeliveryModel, (delivery) => delivery.chats)
+    delivery: DeliveryModel
 
     @ManyToOne(() => ResidentModel, (resident) => resident.chats)
     resident: ResidentModel

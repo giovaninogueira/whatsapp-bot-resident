@@ -11,6 +11,8 @@ class App {
    */
   static appDataSource: DataSource;
 
+  static whatsAppProvider: WhatsAppProvider
+
   /**
    * Mains app
    */
@@ -23,7 +25,9 @@ class App {
     app.use(express.json())
     app.use("/", router);
     app.listen(3000, () => console.log("server is running..."));
-    // await WhatsAppProvider.connect('session_test')
+
+    App.whatsAppProvider = new WhatsAppProvider();
+    App.whatsAppProvider.connect('session_test')
   }
 }
 

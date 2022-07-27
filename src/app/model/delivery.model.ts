@@ -5,10 +5,15 @@ import {
     BaseEntity,
     CreateDateColumn,
     UpdateDateColumn,
-    ManyToOne
+    ManyToOne,
+    OneToMany,
+    OneToOne,
+    JoinColumn
 } from "typeorm";
+import { ChatModel } from "./chat.model";
 
 import { HouseModel } from './house.model'
+import { ResidentModel } from "./resident.model";
 
 @Entity({
     name: 'delivery'
@@ -19,6 +24,9 @@ export class DeliveryModel extends BaseEntity {
 
     @Column()
     codePackage: string;
+
+    @Column()
+    length: number
 
     @Column({
         default: false
@@ -31,12 +39,20 @@ export class DeliveryModel extends BaseEntity {
     deliverInHome: boolean;
 
     @Column({
-        type: 'datetime'
+        type: 'datetime',
+        nullable: true
     })
     dateDelivered: Date
 
+    @OneToMany(() => ChatModel, (chat) => chat.delivery)
+    chats: ChatModel[]
+
     @ManyToOne(() => HouseModel, (house) => house.deliveries)
     house: HouseModel
+
+    @OneToOne(() => ResidentModel)
+    @JoinColumn()
+    resident: ResidentModel
 
     @CreateDateColumn()
     createdAt: Date;
