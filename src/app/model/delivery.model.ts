@@ -10,7 +10,9 @@ import {
 
 import { HouseModel } from './house.model'
 
-@Entity()
+@Entity({
+    name: 'delivery'
+})
 export class DeliveryModel extends BaseEntity {
     @PrimaryGeneratedColumn()
     id!: number;
@@ -18,14 +20,18 @@ export class DeliveryModel extends BaseEntity {
     @Column()
     codePackage: string;
 
-    @Column()
+    @Column({
+        default: false
+    })
     delivered: boolean
 
-    @Column()
+    @Column({
+        default: false
+    })
     deliverInHome: boolean;
 
     @Column({
-        type: 'date'
+        type: 'datetime'
     })
     dateDelivered: Date
 
@@ -33,8 +39,8 @@ export class DeliveryModel extends BaseEntity {
     house: HouseModel
 
     @CreateDateColumn()
-    created_at: Date;
+    createdAt: Date;
 
     @UpdateDateColumn()
-    updated_at: Date;
+    updatedAt: Date;
 }

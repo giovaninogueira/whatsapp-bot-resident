@@ -1,18 +1,20 @@
-import { 
-  Entity, 
-  PrimaryGeneratedColumn, 
-  Column, 
-  BaseEntity, 
-  CreateDateColumn, 
-  UpdateDateColumn, 
-  OneToMany, 
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  BaseEntity,
+  CreateDateColumn,
+  UpdateDateColumn,
+  OneToMany,
   ManyToOne
 } from "typeorm";
 
 import { ChatModel } from "./chat.model";
 import { HouseModel } from "./house.model";
 
-@Entity()
+@Entity({
+  name: 'resident'
+})
 export class ResidentModel extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number;
@@ -28,7 +30,9 @@ export class ResidentModel extends BaseEntity {
   })
   cellphone: string;
 
-  @Column()
+  @Column({
+    default: true
+  })
   notify: boolean;
 
   @ManyToOne(() => HouseModel, (house) => house.residents)
@@ -38,8 +42,8 @@ export class ResidentModel extends BaseEntity {
   chats: ChatModel[]
 
   @CreateDateColumn()
-  created_at: Date;
+  createdAt: Date;
 
   @UpdateDateColumn()
-  updated_at: Date;
+  updatedAt: Date;
 }

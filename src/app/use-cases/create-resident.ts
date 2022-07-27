@@ -10,7 +10,8 @@ class CreateResidentUseCase {
    * @returns 
    */
   async execute(req: Request, resp: Response) {
-    const { name, cellphone, houseId } = req.body;
+    const { name, cellphone, houseId, notify } = req.body;
+
     const existPhone = await ResidentModel.findOneBy({ cellphone });
     const house = await HouseModel.findOneBy({ id: houseId })
 
@@ -30,10 +31,11 @@ class CreateResidentUseCase {
     residentModel.name = name;
     residentModel.house = house
     residentModel.cellphone = cellphone;
+    residentModel.notify = notify;
     await residentModel.save();
 
     return resp.status(201).send({
-      data: 'residentModel',
+      data: residentModel,
     });
   }
 }

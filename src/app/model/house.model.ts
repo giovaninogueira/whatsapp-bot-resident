@@ -1,8 +1,18 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, UpdateDateColumn, OneToMany } from "typeorm";
+import { 
+    Entity, 
+    PrimaryGeneratedColumn, 
+    Column, 
+    BaseEntity, 
+    CreateDateColumn, 
+    UpdateDateColumn, 
+    OneToMany 
+} from "typeorm";
 import { DeliveryModel } from "./delivery.model";
 import { ResidentModel } from "./resident.model";
 
-@Entity()
+@Entity({
+    name: 'house'
+})
 export class HouseModel extends BaseEntity {
     @PrimaryGeneratedColumn()
     id!: number;
@@ -14,6 +24,11 @@ export class HouseModel extends BaseEntity {
     number: string;
 
     @Column()
+    zipCode: string;
+
+    @Column({
+        nullable: true
+    })
     complement: string;
 
     @OneToMany(() => DeliveryModel, (delivery) => delivery.house)
@@ -23,8 +38,8 @@ export class HouseModel extends BaseEntity {
     residents: ResidentModel[]
 
     @CreateDateColumn()
-    created_at: Date;
+    createdAt: Date;
 
     @UpdateDateColumn()
-    updated_at: Date;
+    updatedAt: Date;
 }

@@ -10,7 +10,9 @@ import {
 
 import { ResidentModel } from './resident.model'
 
-@Entity()
+@Entity({
+    name: 'chat'
+})
 export class ChatModel extends BaseEntity {
     @PrimaryGeneratedColumn()
     id!: number;
@@ -21,22 +23,25 @@ export class ChatModel extends BaseEntity {
     message: string;
 
     @Column({
-        type: 'text'
+        type: 'text',
+        nullable: true
     })
     response: string;
 
     @Column()
     chatId: string;
 
-    @Column()
+    @Column({
+        default: false
+    })
     waitResponse: boolean
 
     @ManyToOne(() => ResidentModel, (resident) => resident.chats)
     resident: ResidentModel
 
     @CreateDateColumn()
-    created_at: Date;
+    createdAt: Date;
 
     @UpdateDateColumn()
-    updated_at: Date;
+    updatedAt: Date;
 }
